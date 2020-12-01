@@ -5,7 +5,7 @@ import com.example.endlistingapp.model.ListingModel
 import io.reactivex.Single
 import retrofit2.http.GET
 
-interface ListingClient {
+interface EndClient {
     @GET(ENDPOINT_LISTING)
     fun getCurrentListing(): Single<ListingModel>
 }
