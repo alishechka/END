@@ -3,7 +3,9 @@ package com.example.endlistingapp
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.endlistingapp.di.DaggerAppComponent
 import com.example.endlistingapp.di.DaggerViewModelComponent
 import com.example.endlistingapp.di.modules.NetworkModule
@@ -23,13 +25,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val context: Context = MyApp.applicationContext()
-        Timber.d(context.toString())
-
         initDagger()
         viewModel.getItemListing()
+        initRecyclerView()
+
+    }
+
+    private fun initRecyclerView() {
         viewModel.getListingSuccess().observe(this, Observer {
-            test_text.text=it.title
+            tv_item_count.text = it.product_count.toString() + getString(R.string.item_count)
+            rv_listing.apply {
+                adapter = ListingAdapter(it.products)
+                layoutManager = GridLayoutManager(this@MainActivity, 2)
+            }
+
+        })
+        viewModel.getError().observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         })
     }
 

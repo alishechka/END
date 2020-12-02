@@ -47,6 +47,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
 
+    // RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
     // CardView
     implementation "androidx.cardview:cardview:1.0.0"
 

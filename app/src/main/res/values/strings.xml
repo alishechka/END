@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EndListingApp</string>
+    <string name="ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="item_count">\ items</string>
 </resources>

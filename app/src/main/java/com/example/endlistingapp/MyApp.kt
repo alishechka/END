@@ -9,18 +9,6 @@ import timber.log.Timber
 
 class MyApp : Application() {
 
-    init {
-        instance = this
-    }
-
-    companion object {
-        private var instance: MyApp? = null
-
-        fun applicationContext(): Context {
-            return instance!!.applicationContext
-        }
-    }
-
     fun component(): AppComponent {
         return DaggerAppComponent.builder()
             .networkModule(NetworkModule())
