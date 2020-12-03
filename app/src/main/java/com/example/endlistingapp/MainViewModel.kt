@@ -1,5 +1,6 @@
 package com.example.endlistingapp
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +9,7 @@ import com.example.endlistingapp.repository.Repository
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 
-class MainViewModel(private val repo: Repository) : ViewModel() {
+class MainViewModel @ViewModelInject constructor(private val repo: Repository) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
     private val listingSuccess = MutableLiveData<ListingModel>()
@@ -20,10 +21,14 @@ class MainViewModel(private val repo: Repository) : ViewModel() {
     fun getItemListing() {
         compositeDisposable.add(
             repo.fetchListing().subscribe(
-                { listing -> listingSuccess.value = listing
-                Timber.d(listing.title)},
-                { e -> error.value = e.localizedMessage
-                Timber.d(e.localizedMessage)}
+                { listing ->
+                    listingSuccess.value = listing
+                    Timber.d(listing.title)
+                },
+                { e ->
+                    error.value = e.localizedMessage
+                    Timber.d(e.localizedMessage)
+                }
             )
         )
     }
