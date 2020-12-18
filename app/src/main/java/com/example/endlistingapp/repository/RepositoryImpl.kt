@@ -8,9 +8,8 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val client: EndClient) : Repository {
-    override fun fetchListing(): Single<ListingModel> {
+    override suspend fun fetchListing(): ListingModel {
         return client.getCurrentListing()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+
     }
 }

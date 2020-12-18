@@ -7,5 +7,5 @@ import retrofit2.http.GET
 
 interface EndClient {
     @GET(ENDPOINT_LISTING)
-    fun getCurrentListing(): Single<ListingModel>
+    suspend fun getCurrentListing(): ListingModel
 }
